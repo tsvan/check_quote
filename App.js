@@ -1,13 +1,30 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import Quote from './components/quote';
+import QuoteScreen from './screens/QuoteScreen';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import OptionsScreen from './screens/OptionsScreen';
+import StartScreen from './screens/StartScreen';
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      {
+          <Stack.Navigator screenOptions={{headerShown: false}}>
+            <Stack.Screen
+              name="Start"
+              component={StartScreen}
+              options={{ title: 'Welcome' }}
+            />
+            <Stack.Screen name="Quote" component={QuoteScreen} />
+            <Stack.Screen name="Options" component={OptionsScreen} />
+          </Stack.Navigator>
+      }
+    </NavigationContainer>
   );
 }
 
