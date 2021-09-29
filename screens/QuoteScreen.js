@@ -1,6 +1,8 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
 import Quote from '../components/quote';
+import quotes_data from '../assets/data/quotes_data'
+
 let quotes = [
   { id: 1, author: 'Альберт Эйнштейн', quote: 'Все мы гении. Но если вы будете судить рыбу по её способности взбираться на дерево, она проживёт всю жизнь, считая себя дурой.', info: '' },
   { id: 2, author: 'Фаина Раневская', quote: 'Если у тебя есть человек, которому можно рассказать сны, ты не имеешь права считать себя одиноким...', info: '' },
@@ -12,6 +14,19 @@ let quotes = [
 export default function QuoteScreen({ navigation, route }) {
   const [currentQuoteIndex, setCurrentQuoteIndex] = React.useState(0);
   const [currentQuote, setCurrentQuote] = React.useState(null);
+
+  React.useEffect(() => {
+    console.log('use effect quotes screen');
+    readfromFile()
+  }, []);
+
+  function readfromFile() {
+
+    var lines = quotes_data.split('\n');
+    for(var line = 0; line < lines.length; line++){
+      console.log(lines[line]);
+    }
+  }
 
   function pressAnswer(answer) {
     if (currentQuoteIndex < quotes.length) {
