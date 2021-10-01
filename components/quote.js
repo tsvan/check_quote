@@ -11,7 +11,7 @@ export default function Quote(props) {
         <View>
 
           <View style={styles.quoteContainer}>
-            <Text>{props.quote.quote}</Text>
+            <Text>{props.quote.text}</Text>
           </View>
 
           <View style={styles.authorContainer}>

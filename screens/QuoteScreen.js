@@ -1,70 +1,84 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
 import Quote from '../components/quote';
-import quotes_data from '../assets/data/quotes_data'
+import {getRandomQuote} from "../data/DataService";
 
-let quotes = [
-  { id: 1, author: 'Альберт Эйнштейн', quote: 'Все мы гении. Но если вы будете судить рыбу по её способности взбираться на дерево, она проживёт всю жизнь, считая себя дурой.', info: '' },
-  { id: 2, author: 'Фаина Раневская', quote: 'Если у тебя есть человек, которому можно рассказать сны, ты не имеешь права считать себя одиноким...', info: '' },
-  { id: 3, author: 'Поль Жеральди', quote: 'Нужно иметь что-то общее, чтобы понимать друг друга, и чем-то отличаться, чтобы любить друг друга.', info: '' },
-  { id: 4, author: 'Михаил Булгаков', quote: '... самый страшный гнев, гнев бессилия.', info: '' },
-  { id: 5, author: 'Хатико: Самый верный друг (Hachiko: A Dog', quote: 'Они научили меня ценить верность... И никогда не забывать о тех, кого любишь.', info: '' },
-];
 
 export default function QuoteScreen({ navigation, route }) {
-  const [currentQuoteIndex, setCurrentQuoteIndex] = React.useState(0);
   const [currentQuote, setCurrentQuote] = React.useState(null);
+  const [answered, setAnswered] = React.useState(false);
+  const [isAnswerCorrect, setIsAnswerCorrect] = React.useState(null);
+
 
   React.useEffect(() => {
     console.log('use effect quotes screen');
-    readfromFile()
+    nextQuote()
   }, []);
 
-  function readfromFile() {
-
-    var lines = quotes_data.split('\n');
-    for(var line = 0; line < lines.length; line++){
-      console.log(lines[line]);
-    }
+  function pressAnswer(answer) {
+    console.log(answer === currentQuote.is_correct ? 'верно' : 'неверно')
+    setIsAnswerCorrect(answer === currentQuote.is_correct)
+    setAnswered(true)
   }
 
-  function pressAnswer(answer) {
-    if (currentQuoteIndex < quotes.length) {
-      setCurrentQuote(quotes[currentQuoteIndex + 1]);
-      setCurrentQuoteIndex(currentQuoteIndex + 1);
-      console.log('next quote');
-    }
-    console.log(answer)
+  function nextQuote() {
+    let next = getRandomQuote();
+      setCurrentQuote(next);
+      setAnswered(false)
+      console.log('next quote',next );
+  }
+
+  function generateAnswerText(quote){
+    let answer = isAnswerCorrect ? 'верно' : 'неверно';
+    answer += ' .' + (quote.hasOwnProperty('real_author') ? 'Настоящий автор:'+ quote.real_author : '')
+    return answer;
   }
 
   return (
     <View style={styles.container}>
-      <View style={styles.button}>
+      <View style={styles.buttonBack}>
         <Button
           title="Назад"
           onPress={() => navigation.navigate('Start')}
         />
       </View>
 
-      <Quote quote={currentQuote} />
+      {
+        (!answered) ? (
+          <View style={styles.container}>
+            <Quote quote={currentQuote} />
 
-      <View style={styles.buttonsContainer}>
-        <View style={styles.button}>
-          <Button
-            style={styles.button}
-            title="Да"
-            onPress={() => pressAnswer('yes')}
-          />
-        </View>
-        <View style={styles.button}>
-          <Button
-            style={styles.button}
-            title="Нет"
-            onPress={() => pressAnswer('no')}
-          />
-        </View>
-      </View>
+            <View style={styles.buttonsContainer}>
+              <View style={styles.button}>
+                <Button
+                  style={styles.button}
+                  title="Да"
+                  onPress={() => pressAnswer(true)}
+                />
+              </View>
+              <View style={styles.button}>
+                <Button
+                  style={styles.button}
+                  title="Нет"
+                  onPress={() => pressAnswer(false)}
+                />
+              </View>
+            </View>
+          </View>
 
+        ) : (
+          <View style={styles.container}>
+            <Text>Ответ: {generateAnswerText(currentQuote)}</Text>
+            <View style={styles.button}>
+                <Button
+                  style={styles.button}
+                  title="Далее"
+                  onPress={() => nextQuote()}
+                />
+              </View>
+          </View>
+        )
+      }
       <View>
         <Text>Footer</Text>
       </View>
@@ -78,11 +92,18 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+    margin:20
   },
   button: {
     width: '40%',
     alignContent: 'center',
     margin: 10
+  },
+  buttonBack: {
+    width: '40%',
+    alignContent: 'center',
+    margin: 10,
+    marginTop: 40
   },
   buttonsContainer: {
     flexDirection: 'row'
