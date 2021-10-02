@@ -37,7 +37,7 @@ let quotes_data = [
 { author:'', text:'Tы нe пapьcя, и нe гpycти, вce бyдeт кpyтo, cчacтьe впepeди.', category:2, is_correct:false },
 { author:'Аристотель', text:'Друг всем — ничей друг.', category:7, is_correct:true },
 { author:'', text:'У меня нет пушки, нет толпы за спиной, но есть пару кентов которые хоть в ад пойдут со мной!', category:2, is_correct:false },
-{ author:'', text:'?е жди ничeгo, и ты не будешь paзoчaрoвaн.', category:2, is_correct:false },
+{ author:'', text:'не жди ничeгo, и ты не будешь paзoчaрoвaн.', category:2, is_correct:false },
 { author:'', text:'Если тебе тяжело идти, значит ты жирный.', category:2, is_correct:false },
 { author:'Платон', text:'Любовь — это серьезное психическое заболевание.', category:7, is_correct:true },
 { author:'', text:'Живи, кайфуй, гуляй, играй - упал вставай ,наглей, ругай - чужих роняй,своих спасай - держись за принцип-выживай!', category:2, is_correct:false },

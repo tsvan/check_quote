@@ -2,20 +2,18 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 export default function Quote(props) {
-  const [quote, setquote] = React.useState(0);
 
   return (
     <View style={styles.container}>
-      <Text> Верна ли цитата ?</Text>
-      {props.quote && 
+      {props.quote &&
         <View>
 
           <View style={styles.quoteContainer}>
-            <Text>{props.quote.text}</Text>
+            <Text style={{fontSize:16}}>{'\t'}{props.quote.text}</Text>
           </View>
 
           <View style={styles.authorContainer}>
-            <Text>{props.quote.author}</Text>
+            <Text style={{fontStyle: 'italic', fontSize:16}}>— {props.quote.author}</Text>
           </View>
 
         </View>
@@ -31,6 +29,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+    width:'100%'
   },
   quoteContainer: {
     alignContent: 'center',

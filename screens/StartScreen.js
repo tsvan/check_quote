@@ -4,7 +4,7 @@ import { StyleSheet, Text, View, Button } from 'react-native';
 export default function StartScreen({ navigation }) {
     return (
         <View style={styles.container}>
-            <Text>Угадай цитату2!</Text>
+            <Text style={{fontSize:16, margin: 5}}>Есть ли такая цитата?</Text>
             <View style={styles.button}>
                 <Button
                     title="Начать"
