@@ -1,10 +1,10 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, Text, View, Button,BackHandler } from 'react-native';
 
 export default function StartScreen({ navigation }) {
     return (
         <View style={styles.container}>
-            <Text style={{fontSize:16, margin: 5}}>Есть ли такая цитата?</Text>
+            <Text style={{fontSize:18, margin: 5}}>Есть ли такая цитата?</Text>
             <View style={styles.button}>
                 <Button
                     title="Начать"
@@ -17,6 +17,13 @@ export default function StartScreen({ navigation }) {
                     onPress={() => navigation.navigate('Options')}
                 />
             </View>
+
+            <View style={styles.button} >
+                <Button
+                    title="Выход"
+                    onPress={() => BackHandler.exitApp()}
+                />
+            </View>
         
         </View>
     );
@@ -25,11 +32,10 @@ export default function StartScreen({ navigation }) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#1235',
-        color:'red',
         alignItems: 'center',
         justifyContent: 'center',
-        padding: 10
+        padding: 10,
+        backgroundColor: '#e5decc',
     },
     button: {
         width: '50%',

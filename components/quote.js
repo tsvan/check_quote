@@ -1,12 +1,14 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, ImageBackground } from 'react-native';
+// import image from 'assets/book_sheet.png'
 
 export default function Quote(props) {
 
   return (
     <View style={styles.container}>
       {props.quote &&
-        <View>
+
+      <View>
 
           <View style={styles.quoteContainer}>
             <Text style={{fontSize:16}}>{'\t'}{props.quote.text}</Text>
@@ -17,7 +19,8 @@ export default function Quote(props) {
           </View>
 
         </View>
-      
+
+
       }
     </View>
   );
@@ -26,17 +29,22 @@ export default function Quote(props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-    width:'100%'
+    width:'100%',
+
   },
   quoteContainer: {
     alignContent: 'center',
-    margin: 10
+    width:'95%',
+    margin: 5
   },
   authorContainer: {
     alignItems: 'flex-end',
-    margin: 10
+    margin: 5
+  },
+  image: {
+    flex: 1,
+    justifyContent: "center"
   },
 });

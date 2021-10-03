@@ -32,3 +32,25 @@ export function getRandomQuote() {
 
     return quote;
 }
+
+export function getRandomCorrectText() {
+    let answers = [
+        'Абсолютно верно!',
+        'Правильный Ответ!',
+        'Точно!',
+        'Вы правы!',
+    ]
+    let rand = Math.floor(Math.random() * 3);
+    return answers[rand];
+}
+
+export function getRandomInCorrectText() {
+    let answers = [
+        'Неверно.',
+        'Ответ неверный.',
+        'Неправильный ответ.',
+        'Вы ошиблись.',
+    ]
+    let rand = Math.floor(Math.random() * 3);
+    return answers[rand];
+}
