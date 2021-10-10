@@ -17,8 +17,7 @@ function getRandAuthorNotEquals(author) {
     return newAuthor.name;
 }
 
-export function getRandomQuote() {
-    let quote = quotes_data[Math.floor((Math.random()*quotes_data.length))];
+export function formatQuote(quote) {
     let rand = Math.floor(Math.random() * RANDOM_WEIGHT);
     if(quote.is_correct) {
         if(rand === 0 ) {
@@ -31,6 +30,15 @@ export function getRandomQuote() {
     }
 
     return quote;
+}
+
+export function getRandomQuotes() {
+    let quotes = quotes_data.sort(() => Math.random() - Math.random()).slice(0, 20);
+    quotes.map(function (quote) {
+        return formatQuote(quote)
+    })
+
+    return quotes;
 }
 
 export function getRandomCorrectText() {

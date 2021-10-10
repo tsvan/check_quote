@@ -1,7 +1,8 @@
 import React from 'react';
 import {StyleSheet, Text, View, Button, TouchableOpacity, ImageBackground} from 'react-native';
 import Quote from '../components/quote';
-import {getRandomQuote, getRandomCorrectText, getRandomInCorrectText} from "../data/DataService";
+import { getRandomCorrectText, getRandomInCorrectText} from "../data/DataService";
+import {get_random_quotes} from "../actions/QuoteAction";
 
 
 export default function QuoteScreen({ navigation, route }) {
@@ -9,6 +10,7 @@ export default function QuoteScreen({ navigation, route }) {
   const [answered, setAnswered] = React.useState(false);
   const [score, setScore] = React.useState(0);
   const [isAnswerCorrect, setIsAnswerCorrect] = React.useState(null);
+  const [quotesList, setQuotesList] = React.useState([]);
 
 
   React.useEffect(() => {
@@ -25,14 +27,27 @@ export default function QuoteScreen({ navigation, route }) {
     } else {
       setScore(0)
     }
-    // setTimeout(()=>{nextQuote()}, 2000);
+  }
+
+  function quotesCallback(quotes) {
+    let tmp = quotes
+    let next = tmp.shift()
+    setQuotesList(tmp)
+    setCurrentQuote(next);
+    setAnswered(false)
   }
 
   function nextQuote() {
-    let next = getRandomQuote();
-    setCurrentQuote(next);
-    setAnswered(false)
-    console.log('next quote',next );
+    console.log('next', quotesList.length)
+    if(quotesList.length === 0) {
+      get_random_quotes(quotesCallback)
+    } else {
+      let tmp = [...quotesList]
+      let next = tmp.shift()
+      setQuotesList(tmp)
+      setCurrentQuote(next);
+      setAnswered(false)
+    }
   }
 
   function realAuthorText(quote){
