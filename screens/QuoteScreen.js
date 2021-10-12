@@ -2,7 +2,7 @@ import React from 'react';
 import {StyleSheet, Text, View, Button, TouchableOpacity, ImageBackground} from 'react-native';
 import Quote from '../components/quote';
 import { getRandomCorrectText, getRandomInCorrectText} from "../data/DataService";
-import {get_random_quotes} from "../actions/QuoteAction";
+import {getRandomQuotesAction} from "../actions/QuoteAction";
 
 
 export default function QuoteScreen({ navigation, route }) {
@@ -40,7 +40,7 @@ export default function QuoteScreen({ navigation, route }) {
   function nextQuote() {
     console.log('next', quotesList.length)
     if(quotesList.length === 0) {
-      get_random_quotes(quotesCallback)
+      getRandomQuotesAction(quotesCallback)
     } else {
       let tmp = [...quotesList]
       let next = tmp.shift()

@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button,BackHandler } from 'react-native';
+import { StyleSheet, Text, View, Button,BackHandler, TextInput } from 'react-native';
 
 export default function StartScreen({ navigation }) {
     return (
@@ -13,8 +13,8 @@ export default function StartScreen({ navigation }) {
             </View>
             <View style={styles.button} >
                 <Button
-                    title="Настройки"
-                    onPress={() => navigation.navigate('Options')}
+                    title="Добавить цитату"
+                    onPress={() => navigation.navigate('AddQuote')}
                 />
             </View>
 

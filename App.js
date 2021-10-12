@@ -7,6 +7,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import OptionsScreen from './screens/OptionsScreen';
 import StartScreen from './screens/StartScreen';
+import AddQuoteScreen from "./screens/AddQuoteScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -22,6 +23,8 @@ export default function App() {
             />
             <Stack.Screen name="Quote" component={QuoteScreen} />
             <Stack.Screen name="Options" component={OptionsScreen} />
+            <Stack.Screen name="AddQuote" component={AddQuoteScreen} />
+
           </Stack.Navigator>
       }
     </NavigationContainer>
