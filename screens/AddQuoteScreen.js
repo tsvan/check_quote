@@ -45,12 +45,15 @@ export default function AddQuoteScreen({ navigation }) {
                     style={styles.input}
                     onChangeText={setAuthor}
                     value={author}
+                    placeholder={'Конфуций'}
+
                 />
                 <Text style={{ marginTop:5, marginBottom:5 }}>Текст цитаты(<Text style={{color:'red'}}>*</Text>):</Text>
                 <TextInput
                     style={styles.input}
                     onChangeText={setQuote}
                     value={quote}
+                    placeholder={'Не тот велик, кто никогда не падал, а тот велик — кто падал и вставал!'}
                     editable
                     multiline
                     numberOfLines={6}

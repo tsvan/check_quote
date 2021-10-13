@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, Text, View, Button, TouchableOpacity, ImageBackground} from 'react-native';
+import {StyleSheet, Text, View, Button, TouchableOpacity, ImageBackground, Clipboard} from 'react-native';
 import Quote from '../components/quote';
 import { getRandomCorrectText, getRandomInCorrectText} from "../data/DataService";
 import {getRandomQuotesAction} from "../actions/QuoteAction";
@@ -56,6 +56,12 @@ export default function QuoteScreen({ navigation, route }) {
     return str;
   }
 
+  function copyQuoteToClipBoard() {
+    if(currentQuote ){
+      Clipboard.setString(currentQuote.text+'\n' +'— '+currentQuote.author);
+    }
+  }
+
   return (
 
     <View style={styles.container}>
@@ -73,17 +79,20 @@ export default function QuoteScreen({ navigation, route }) {
         (!answered) ? (
 
             <View style={styles.quoteContainer}>
-              <ImageBackground source={require('../assets/img.png')} resizeMode={"cover"} style={styles.image}>
+              <TouchableOpacity  onPress={() => copyQuoteToClipBoard()}>
+                <Text style={{ fontSize:14, textDecorationLine: 'underline'}} >Копировать цитату</Text>
+              </TouchableOpacity>
+              <ImageBackground source={require('../assets/quoteBG.png')} resizeMode={"cover"} style={styles.image}>
 
                 <Quote quote={currentQuote} />
               </ImageBackground>
 
             <View style={styles.answerButtons}>
               <TouchableOpacity  onPress={() => pressAnswer(true)} style={styles.buttonCorrect}>
-                <Text style={{color:'white'}} >Есть такая цитата</Text>
+                <Text style={{color:'white', fontFamily:'Comfortaa'}} >Есть такая цитата</Text>
               </TouchableOpacity>
               <TouchableOpacity  onPress={() => pressAnswer(false)} style={styles.buttonInCorrect}>
-                <Text style={{color:'white'}}>Нет такой цитаты</Text>
+                <Text style={{color:'white', fontFamily:'Comfortaa'}}>Нет такой цитаты</Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -222,10 +231,10 @@ const styles = StyleSheet.create({
   image: {
     flex: 1,
     width:'100%',
-    borderColor: 'rgba(158, 150, 150, .5)',
+    borderColor: '#e5decc',
     justifyContent: "center",
     borderWidth: 1,
-    borderRadius: 10,
+    borderRadius: 15,
     overflow: 'hidden'
   },
 });

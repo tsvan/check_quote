@@ -8,7 +8,7 @@
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#e5decc"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -20,9 +20,14 @@
       "supportsTablet": true
     },
     "android": {
+      "package": "com.tsvan.checkquote",
+      "versionCode": 1,
+      "icon": "./assets/icon.png",
+      "permissions" : [],
+
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#FFFFFF"
+        "foregroundImage": "./assets/icon.png",
+        "backgroundColor": "#e5decc"
       }
     },
     "web": {

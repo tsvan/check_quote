@@ -1,6 +1,5 @@
 import React from 'react';
 import { StyleSheet, Text, View, ImageBackground } from 'react-native';
-// import image from 'assets/book_sheet.png'
 
 export default function Quote(props) {
 
@@ -11,11 +10,11 @@ export default function Quote(props) {
       <View>
 
           <View style={styles.quoteContainer}>
-            <Text style={{fontSize:16}}>{'\t'}{props.quote.text}</Text>
+            <Text style={{fontSize:26,  fontFamily: 'Caveat-Regular'}}>{'\t'}{props.quote.text}</Text>
           </View>
 
           <View style={styles.authorContainer}>
-            <Text style={{fontStyle: 'italic', fontSize:16}}>— {props.quote.author}</Text>
+            <Text style={{fontSize:22,  fontFamily: 'Caveat-Regular', padding: 5}}>— {props.quote.author} </Text>
           </View>
 
         </View>
@@ -37,7 +36,7 @@ const styles = StyleSheet.create({
   quoteContainer: {
     alignContent: 'center',
     width:'95%',
-    margin: 5
+    margin: 5,
   },
   authorContainer: {
     alignItems: 'flex-end',
