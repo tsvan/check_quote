@@ -2,13 +2,18 @@ import React from 'react';
 import {StyleSheet, Text, View, Button, TextInput, TouchableOpacity, Alert} from 'react-native';
 import {Picker} from '@react-native-picker/picker';
 import {addQuoteAction} from "../actions/QuoteAction";
+import {ADMOB_BANNER,ADMOB_REWARD} from '../conf'
+import {
+    AdMobBanner,
+    AdMobRewarded,
+} from 'expo-ads-admob';
 
 export default function AddQuoteScreen({ navigation }) {
 
     const [quote, setQuote] = React.useState('');
     const [author, setAuthor] = React.useState('');
     const [isCorrect, setIsCorrect] = React.useState('1');
-    function addQuote() {
+    async function addQuote() {
 
         if(quote.length < 10) {
             Alert.alert(
@@ -25,9 +30,28 @@ export default function AddQuoteScreen({ navigation }) {
         data.append("author", author);
         data.append("text", quote);
         data.append("is_correct", isCorrect);
-        addQuoteAction(data);
-        setQuote('')
-        setAuthor('')
+        Alert.alert(
+            "Реклама",
+            "Для отправки цитаты нужно посмотреть рекламу",
+            [
+                { text: "Отмена", onPress: () => console.log("Cancel advertising") },
+                { text: "Смотреть", onPress: () => showAdvertising(data) }
+            ]
+        );
+    }
+
+
+    async function showAdvertising(data) {
+        await AdMobRewarded.setAdUnitID(ADMOB_REWARD); // Test ID, Replace with your-admob-unit-id
+        await AdMobRewarded.requestAdAsync();
+
+        AdMobRewarded.addEventListener("rewardedVideoDidDismiss", () => {
+            addQuoteAction(data);
+            setQuote('')
+            setAuthor('')
+            console.log('CLOSE');
+        });
+        await AdMobRewarded.showAdAsync();
     }
 
     return (
@@ -74,7 +98,12 @@ export default function AddQuoteScreen({ navigation }) {
                     <Text style={{color:'#e7d9c4', fontSize: 18}} >Отправить</Text>
                 </TouchableOpacity>
             </View>
-
+            <View slyle={{ alignItems: 'flex-end', marginTop:10}}>
+                <AdMobBanner
+                    bannerSize="smartBannerPortrait"
+                    adUnitID={ADMOB_BANNER} // Test ID, Replace with your-admob-unit-id
+                    onDidFailToReceiveAdWithError={(e) => console.log(e)} />
+            </View>
         </View>
     );
 }
@@ -86,7 +115,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         width:'100%',
         backgroundColor: '#e5decc',
-        padding:5
+        padding:5,
     },
     button: {
         width: '50%',
@@ -95,7 +124,6 @@ const styles = StyleSheet.create({
     },
     inputContainer: {
         flex: 1,
-
         width: '100%',
         alignContent:'center',
         padding: 10

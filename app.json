@@ -24,7 +24,9 @@
       "versionCode": 1,
       "icon": "./assets/icon.png",
       "permissions" : [],
-
+      "config": {
+        "googleMobileAdsAppId": "ca-app-pub-3940256099942544~3347511713"
+      },
       "adaptiveIcon": {
         "foregroundImage": "./assets/icon.png",
         "backgroundColor": "#e5decc"

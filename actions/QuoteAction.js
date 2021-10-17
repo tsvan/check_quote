@@ -1,6 +1,6 @@
 import axios from "axios";
 import {getRandomQuotes} from '../data/DataService'
-import {server} from "./conf";
+import {server} from "../conf";
 import {Alert} from "react-native";
 
 export function getRandomQuotesAction(quotesCallback) {

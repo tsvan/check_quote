@@ -3,6 +3,8 @@ import {StyleSheet, Text, View, Button, TouchableOpacity, ImageBackground, Clipb
 import Quote from '../components/quote';
 import { getRandomCorrectText, getRandomInCorrectText} from "../data/DataService";
 import {getRandomQuotesAction} from "../actions/QuoteAction";
+import {AdMobBanner} from "expo-ads-admob";
+import {ADMOB_BANNER} from "../conf";
 
 
 export default function QuoteScreen({ navigation, route }) {
@@ -102,19 +104,25 @@ export default function QuoteScreen({ navigation, route }) {
             {
               isAnswerCorrect ? (
                   <View style={styles.rightAnswer}>
-                    <Text style={{color:'#1e750a', fontSize:18}}>{getRandomCorrectText()}</Text>
+                    <Text style={{color:'#1e750a', fontSize:22}}>{getRandomCorrectText()}</Text>
                   </View>
               ) : (
                   <View style={styles.rightAnswer}>
-                    <Text style={{color:'#e0196c', fontSize:18,}}>{getRandomInCorrectText()}</Text>
+                    <Text style={{color:'#e0196c', fontSize:22}}>{getRandomInCorrectText()}</Text>
                   </View>
               )
             }
-            <Text style={{textAlign:'center', fontStyle: 'italic'}}>{realAuthorText(currentQuote)}</Text>
+            <Text style={{textAlign:'center', fontStyle: 'italic', fontSize:18}}>{realAuthorText(currentQuote)}</Text>
 
           </TouchableOpacity>
         )
       }
+      <View slyle={{ alignItems: 'flex-end', marginTop:20}}>
+        <AdMobBanner
+            bannerSize="smartBannerPortrait"
+            adUnitID={ADMOB_BANNER} // Test ID, Replace with your-admob-unit-id
+            onDidFailToReceiveAdWithError={(e) => console.log(e)} />
+      </View>
     </View>
   );
 }
