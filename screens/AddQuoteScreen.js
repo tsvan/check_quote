@@ -1,26 +1,27 @@
 import React from 'react';
-import {StyleSheet, Text, View, Button, TextInput, TouchableOpacity, Alert} from 'react-native';
+import {StyleSheet, Text, View, TextInput, TouchableOpacity, Alert, ScrollView} from 'react-native';
 import {Picker} from '@react-native-picker/picker';
 import {addQuoteAction} from "../actions/QuoteAction";
-import {ADMOB_BANNER,ADMOB_REWARD} from '../conf'
+import {ADMOB_BANNER_ADD, ADMOB_REWARD} from '../conf'
 import {
     AdMobBanner,
     AdMobRewarded,
 } from 'expo-ads-admob';
 
-export default function AddQuoteScreen({ navigation }) {
+export default function AddQuoteScreen({navigation}) {
 
     const [quote, setQuote] = React.useState('');
     const [author, setAuthor] = React.useState('');
     const [isCorrect, setIsCorrect] = React.useState('1');
+
     async function addQuote() {
 
-        if(quote.length < 10) {
+        if (quote.length < 10) {
             Alert.alert(
                 "Ошибка",
                 "Цитата должна быть больше 10 символов",
                 [
-                    { text: "OK", onPress: () => console.log("OK Pressed") }
+                    {text: "OK", onPress: () => console.log("OK Pressed")}
                 ]
             );
             return;
@@ -34,8 +35,8 @@ export default function AddQuoteScreen({ navigation }) {
             "Реклама",
             "Для отправки цитаты нужно посмотреть рекламу",
             [
-                { text: "Отмена", onPress: () => console.log("Cancel advertising") },
-                { text: "Смотреть", onPress: () => showAdvertising(data) }
+                {text: "Отмена", onPress: () => console.log("Cancel advertising")},
+                {text: "Смотреть", onPress: () => showAdvertising(data)}
             ]
         );
     }
@@ -63,8 +64,8 @@ export default function AddQuoteScreen({ navigation }) {
                 <View style={styles.score}>
                 </View>
             </View>
-            <View style={styles.inputContainer}>
-                <Text  style={{ marginTop:5, marginBottom:5 }}>Автор цитаты:</Text>
+            <ScrollView style={styles.inputContainer}>
+                <Text style={{marginTop: 5, marginBottom: 5}}>Автор цитаты:</Text>
                 <TextInput
                     style={styles.input}
                     onChangeText={setAuthor}
@@ -72,7 +73,8 @@ export default function AddQuoteScreen({ navigation }) {
                     placeholder={'Конфуций'}
 
                 />
-                <Text style={{ marginTop:5, marginBottom:5 }}>Текст цитаты(<Text style={{color:'red'}}>*</Text>):</Text>
+                <Text style={{marginTop: 5, marginBottom: 5}}>Текст цитаты(<Text
+                    style={{color: 'red'}}>*</Text>):</Text>
                 <TextInput
                     style={styles.input}
                     onChangeText={setQuote}
@@ -83,26 +85,27 @@ export default function AddQuoteScreen({ navigation }) {
                     numberOfLines={6}
                 />
 
-                <Text style={{ marginTop:5, marginBottom:5 }}>Существует ли такая цитата?(<Text style={{color:'red'}}>*</Text>):</Text>
+                <Text style={{marginTop: 5, marginBottom: 5}}>Существует ли такая цитата?(<Text
+                    style={{color: 'red'}}>*</Text>):</Text>
                 <View style={styles.pickerContainer}>
                     <Picker
                         selectedValue={isCorrect}
-                        style={{ width:'100%'}}
+                        style={{width: '100%'}}
                         onValueChange={(itemValue, itemIndex) => setIsCorrect(itemValue)}
                     >
-                        <Picker.Item style={{ fontSize:18}} label="Есть такая цитата" value="1" />
-                        <Picker.Item style={{ fontSize:18}}  label="Нет такой цитаты" value="0" />
+                        <Picker.Item style={{fontSize: 18}} label="Есть такая цитата" value="1"/>
+                        <Picker.Item style={{fontSize: 18}} label="Нет такой цитаты" value="0"/>
                     </Picker>
                 </View>
-                <TouchableOpacity  onPress={() => addQuote()} style={styles.buttonAdd}>
-                    <Text style={{color:'#e7d9c4', fontSize: 18}} >Отправить</Text>
+                <TouchableOpacity onPress={() => addQuote()} style={styles.buttonAdd}>
+                    <Text style={{color: '#e7d9c4', fontSize: 18}}>Отправить</Text>
                 </TouchableOpacity>
-            </View>
-            <View slyle={{ alignItems: 'flex-end', marginTop:10}}>
+            </ScrollView>
+            <View slyle={{alignItems: 'flex-end', marginTop: 10}}>
                 <AdMobBanner
                     bannerSize="smartBannerPortrait"
-                    adUnitID={ADMOB_BANNER} // Test ID, Replace with your-admob-unit-id
-                    onDidFailToReceiveAdWithError={(e) => console.log(e)} />
+                    adUnitID={ADMOB_BANNER_ADD} // Test ID, Replace with your-admob-unit-id
+                    onDidFailToReceiveAdWithError={(e) => console.log(e)}/>
             </View>
         </View>
     );
@@ -113,39 +116,40 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        width:'100%',
+        width: '100%',
         backgroundColor: '#e5decc',
-        padding:5,
+        padding: 5,
     },
     button: {
         width: '50%',
-        alignContent:'center',
+        alignContent: 'center',
         margin: 10
     },
     inputContainer: {
         flex: 1,
         width: '100%',
-        alignContent:'center',
-        padding: 10
+        alignContent: 'center',
+        padding: 10,
+        marginBottom: 10
     },
     input: {
         borderWidth: 1,
-        borderRadius:3,
+        borderRadius: 3,
         paddingHorizontal: 5,
-        paddingVertical:5,
-        fontSize:18
+        paddingVertical: 5,
+        fontSize: 18
     },
     pickerContainer: {
         padding: 5,
-        width:'100%',
+        width: '100%',
         borderWidth: 1,
-        borderRadius:3,
+        borderRadius: 3,
     },
     header: {
         flexDirection: 'row',
-        marginTop:60,
-        width:'100%',
-        padding:5
+        marginTop: 60,
+        width: '100%',
+        padding: 5
     },
     buttonBack: {
         alignContent: 'center',
@@ -153,9 +157,9 @@ const styles = StyleSheet.create({
         width: '50%',
         justifyContent: 'center', //Centered horizontally
         alignItems: 'center', //Centered vertically
-        flex:1,
-        borderWidth:1,
-        borderRadius:5,
+        flex: 1,
+        borderWidth: 1,
+        borderRadius: 5,
         borderColor: 'rgba(63,62,62,0.5)',
     },
     score: {
@@ -165,13 +169,13 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     buttonAdd: {
-        marginTop:10,
-        marginBottom:10,
+        marginTop: 10,
+        marginBottom: 10,
         width: '100%',
         justifyContent: 'center',
         alignItems: 'center',
-        borderWidth:1,
-        borderRadius:5,
+        borderWidth: 1,
+        borderRadius: 5,
         borderColor: 'rgba(158, 150, 150, .5)',
         backgroundColor: '#5b4108',
         shadowColor: '#5b4108',
@@ -182,6 +186,6 @@ const styles = StyleSheet.create({
             height: 1,
             width: 1
         },
-        padding:15
+        padding: 15
     },
 });

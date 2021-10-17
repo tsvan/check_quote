@@ -4,7 +4,7 @@ import {server} from "../conf";
 import {Alert} from "react-native";
 
 export function getRandomQuotesAction(quotesCallback) {
-    axios.get(server+'quotes/random')
+    axios.get(server + 'quotes/random')
         .then(
             (response) => {
                 console.log('response.data.');
@@ -20,18 +20,16 @@ export function getRandomQuotesAction(quotesCallback) {
 }
 
 export function addQuoteAction(data) {
-    axios.post(server+'quotes/add', data)
+    axios.post(server + 'quotes/add', data)
         .then(
             (response) => {
-                if(response.data.hasOwnProperty('error'))
-                {
-                    if(response.data.error === 'quote already exist' )
-                    {
+                if (response.data.hasOwnProperty('error')) {
+                    if (response.data.error === 'quote already exist') {
                         Alert.alert(
                             "Ошибка",
                             "Такая цитата уже добавлена",
                             [
-                                { text: "OK", onPress: () => console.log("OK Pressed") }
+                                {text: "OK", onPress: () => console.log("OK Pressed")}
                             ]
                         );
                     } else {
@@ -39,7 +37,7 @@ export function addQuoteAction(data) {
                             "Ошибка",
                             "Не удалось отправить цитату",
                             [
-                                { text: "OK", onPress: () => console.log("OK Pressed") }
+                                {text: "OK", onPress: () => console.log("OK Pressed")}
                             ]
                         );
                     }
@@ -49,7 +47,7 @@ export function addQuoteAction(data) {
                         "Сообщение",
                         "Цитата была добавлена!",
                         [
-                            { text: "OK", onPress: () => console.log("OK Pressed") }
+                            {text: "OK", onPress: () => console.log("OK Pressed")}
                         ]
                     );
                 }

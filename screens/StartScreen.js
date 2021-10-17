@@ -1,8 +1,7 @@
 import React from 'react';
-import {StyleSheet, Text, View, Button, BackHandler, TextInput, TouchableOpacity, Image} from 'react-native';
-import * as Font from "expo-font";
+import {StyleSheet, Text, View, BackHandler, TouchableOpacity, Image} from 'react-native';
 
-export default function StartScreen({ navigation }) {
+export default function StartScreen({navigation}) {
     return (
 
         <View style={styles.container}>
@@ -11,17 +10,17 @@ export default function StartScreen({ navigation }) {
                 style={styles.tinyLogo}
                 source={require('../assets/headerImg.png')}
             />
-            <TouchableOpacity  onPress={() => navigation.navigate('Quote')} style={styles.buttonAdd}>
-                <Text style={{color:'#e7d9c4', fontSize: 18}} >Начать</Text>
+            <TouchableOpacity onPress={() => navigation.navigate('Quote')} style={styles.buttonAdd}>
+                <Text style={{color: '#e7d9c4', fontSize: 18}}>Начать</Text>
             </TouchableOpacity>
-            <TouchableOpacity  onPress={() => navigation.navigate('AddQuote')} style={styles.buttonAdd}>
-                <Text style={{color:'#e7d9c4', fontSize: 18}} >Добавить цитату</Text>
+            <TouchableOpacity onPress={() => navigation.navigate('AddQuote')} style={styles.buttonAdd}>
+                <Text style={{color: '#e7d9c4', fontSize: 18}}>Добавить цитату</Text>
             </TouchableOpacity>
-            <TouchableOpacity  onPress={() => BackHandler.exitApp()} style={styles.buttonAdd}>
-                <Text style={{color:'#e7d9c4', fontSize: 18}} >Выход</Text>
+            <TouchableOpacity onPress={() => BackHandler.exitApp()} style={styles.buttonAdd}>
+                <Text style={{color: '#e7d9c4', fontSize: 18}}>Выход</Text>
             </TouchableOpacity>
 
-        
+
         </View>
     );
 }
@@ -36,17 +35,17 @@ const styles = StyleSheet.create({
     },
     button: {
         width: '50%',
-        alignContent:'center',
+        alignContent: 'center',
         margin: 10
     },
     buttonAdd: {
-        marginTop:10,
-        marginBottom:10,
+        marginTop: 10,
+        marginBottom: 10,
         width: '70%',
         justifyContent: 'center',
         alignItems: 'center',
-        borderWidth:1,
-        borderRadius:5,
+        borderWidth: 1,
+        borderRadius: 5,
         borderColor: 'rgba(158, 150, 150, .5)',
         backgroundColor: '#5b4108',
         shadowColor: '#5b4108',
@@ -57,11 +56,11 @@ const styles = StyleSheet.create({
             height: 1,
             width: 1
         },
-        padding:15
+        padding: 15
     },
     tinyLogo: {
         width: 60,
         height: 60,
-        margin:10
+        margin: 10
     },
 });
