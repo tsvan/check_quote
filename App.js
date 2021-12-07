@@ -1,5 +1,4 @@
 import React from 'react';
-import {StyleSheet,} from 'react-native';
 import QuoteScreen from './screens/QuoteScreen';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
@@ -22,7 +21,7 @@ export default function App() {
                     <Stack.Screen
                         name="Start"
                         component={StartScreen}
-                        options={{title: 'Welcome'}}
+                        options={{title: 'Start'}}
                     />
                     <Stack.Screen name="Quote" component={QuoteScreen}/>
                     <Stack.Screen name="AddQuote" component={AddQuoteScreen}/>
@@ -32,11 +31,3 @@ export default function App() {
         </NavigationContainer>
     );
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-});

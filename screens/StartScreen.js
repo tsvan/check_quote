@@ -5,7 +5,6 @@ export default function StartScreen({navigation}) {
     return (
 
         <View style={styles.container}>
-
             <Image
                 style={styles.tinyLogo}
                 source={require('../assets/headerImg.png')}
@@ -19,8 +18,6 @@ export default function StartScreen({navigation}) {
             <TouchableOpacity onPress={() => BackHandler.exitApp()} style={styles.buttonAdd}>
                 <Text style={{color: '#e7d9c4', fontSize: 18}}>Выход</Text>
             </TouchableOpacity>
-
-
         </View>
     );
 }

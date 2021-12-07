@@ -1,26 +1,25 @@
 import authors_data from "./authors_data";
 import quotes_data from "./quotes_data";
-import category_data from "./category_data";
 
 const RANDOM_WEIGHT = 4;
 
 function getRandomAuthor() {
-    return authors_data[Math.floor((Math.random()*authors_data.length))].name;
+    return authors_data[Math.floor((Math.random() * authors_data.length))].name;
 }
 
 function getRandAuthorNotEquals(author) {
 
-    let newAuthor = authors_data[Math.floor((Math.random()*authors_data.length))];
+    let newAuthor = authors_data[Math.floor((Math.random() * authors_data.length))];
     while (newAuthor === author) {
-        newAuthor = authors_data[Math.floor((Math.random()*authors_data.length))];
+        newAuthor = authors_data[Math.floor((Math.random() * authors_data.length))];
     }
     return newAuthor.name;
 }
 
 export function formatQuote(quote) {
     let rand = Math.floor(Math.random() * RANDOM_WEIGHT);
-    if(quote.is_correct) {
-        if(rand === 0 ) {
+    if (quote.is_correct) {
+        if (rand === 0) {
             quote.real_author = quote.author;
             quote.author = getRandAuthorNotEquals(quote.author);
             quote.is_correct = false;

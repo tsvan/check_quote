@@ -16,12 +16,10 @@ export default function QuoteScreen({navigation, route}) {
 
 
     React.useEffect(() => {
-        console.log('use effect quotes screen');
         nextQuote()
     }, []);
 
     function pressAnswer(answer) {
-        console.log(answer === currentQuote.is_correct ? 'верно' : 'неверно')
         setIsAnswerCorrect(answer === currentQuote.is_correct)
         setAnswered(true)
         if (answer === currentQuote.is_correct) {
@@ -40,7 +38,6 @@ export default function QuoteScreen({navigation, route}) {
     }
 
     function nextQuote() {
-        console.log('next', quotesList.length)
         if (quotesList.length === 0) {
             getRandomQuotesAction(quotesCallback)
         } else {
@@ -53,9 +50,7 @@ export default function QuoteScreen({navigation, route}) {
     }
 
     function realAuthorText(quote) {
-        let str = '';
-        str = (quote.hasOwnProperty('real_author') ? 'Настоящий автор: ' + quote.real_author : '')
-        return str;
+        return (quote.hasOwnProperty('real_author') ? 'Настоящий автор: ' + quote.real_author : '')
     }
 
     function copyQuoteToClipBoard() {
@@ -67,7 +62,6 @@ export default function QuoteScreen({navigation, route}) {
     return (
 
         <View style={styles.container}>
-
             <View style={styles.header}>
                 <TouchableOpacity onPress={() => navigation.navigate('Start')} style={styles.buttonBack}>
                     <Text>Назад</Text>
@@ -76,10 +70,8 @@ export default function QuoteScreen({navigation, route}) {
                     <Text><Text style={{fontWeight: 'bold'}}>Счет:</Text> {score}</Text>
                 </View>
             </View>
-
             {
                 (!answered) ? (
-
                     <View style={styles.quoteContainer}>
                         <TouchableOpacity onPress={() => copyQuoteToClipBoard()}>
                             <Text style={{fontSize: 14, textDecorationLine: 'underline'}}>Копировать цитату</Text>
@@ -88,6 +80,7 @@ export default function QuoteScreen({navigation, route}) {
                                          style={styles.image}>
 
                             <Quote quote={currentQuote}/>
+
                         </ImageBackground>
 
                         <View style={styles.answerButtons}>
@@ -99,7 +92,6 @@ export default function QuoteScreen({navigation, route}) {
                             </TouchableOpacity>
                         </View>
                     </View>
-
                 ) : (
                     <TouchableOpacity onPress={() => nextQuote()} style={styles.answerResult}>
                         {
@@ -125,7 +117,7 @@ export default function QuoteScreen({navigation, route}) {
             <View slyle={{alignItems: 'flex-end', marginTop: 20}}>
                 <AdMobBanner
                     bannerSize="smartBannerPortrait"
-                    adUnitID={ADMOB_BANNER_QUOTE} // Test ID, Replace with your-admob-unit-id
+                    adUnitID={ADMOB_BANNER_QUOTE}
                     onDidFailToReceiveAdWithError={(e) => console.log(e)}/>
             </View>
         </View>
@@ -205,8 +197,8 @@ const styles = StyleSheet.create({
         alignContent: 'center',
         padding: 5,
         width: '50%',
-        justifyContent: 'center', //Centered horizontally
-        alignItems: 'center', //Centered vertically
+        justifyContent: 'center',
+        alignItems: 'center',
         flex: 1,
         borderWidth: 1,
         borderRadius: 5,

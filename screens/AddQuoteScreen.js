@@ -15,7 +15,6 @@ export default function AddQuoteScreen({navigation}) {
     const [isCorrect, setIsCorrect] = React.useState('1');
 
     async function addQuote() {
-
         if (quote.length < 10) {
             Alert.alert(
                 "Ошибка",
@@ -43,15 +42,11 @@ export default function AddQuoteScreen({navigation}) {
 
 
     async function showAdvertising(data) {
-        await AdMobRewarded.setAdUnitID(ADMOB_REWARD); // Test ID, Replace with your-admob-unit-id
+        await AdMobRewarded.setAdUnitID(ADMOB_REWARD);
         await AdMobRewarded.requestAdAsync();
-
-        AdMobRewarded.addEventListener("rewardedVideoDidDismiss", () => {
-            addQuoteAction(data);
-            setQuote('')
-            setAuthor('')
-            console.log('CLOSE');
-        });
+        addQuoteAction(data);
+        setQuote('')
+        setAuthor('')
         await AdMobRewarded.showAdAsync();
     }
 
@@ -71,7 +66,6 @@ export default function AddQuoteScreen({navigation}) {
                     onChangeText={setAuthor}
                     value={author}
                     placeholder={'Конфуций'}
-
                 />
                 <Text style={{marginTop: 5, marginBottom: 5}}>Текст цитаты(<Text
                     style={{color: 'red'}}>*</Text>):</Text>
@@ -91,8 +85,7 @@ export default function AddQuoteScreen({navigation}) {
                     <Picker
                         selectedValue={isCorrect}
                         style={{width: '100%'}}
-                        onValueChange={(itemValue, itemIndex) => setIsCorrect(itemValue)}
-                    >
+                        onValueChange={(itemValue, itemIndex) => setIsCorrect(itemValue)}>
                         <Picker.Item style={{fontSize: 18}} label="Есть такая цитата" value="1"/>
                         <Picker.Item style={{fontSize: 18}} label="Нет такой цитаты" value="0"/>
                     </Picker>
@@ -104,7 +97,7 @@ export default function AddQuoteScreen({navigation}) {
             <View slyle={{alignItems: 'flex-end', marginTop: 10}}>
                 <AdMobBanner
                     bannerSize="smartBannerPortrait"
-                    adUnitID={ADMOB_BANNER_ADD} // Test ID, Replace with your-admob-unit-id
+                    adUnitID={ADMOB_BANNER_ADD}
                     onDidFailToReceiveAdWithError={(e) => console.log(e)}/>
             </View>
         </View>
@@ -155,8 +148,8 @@ const styles = StyleSheet.create({
         alignContent: 'center',
         padding: 5,
         width: '50%',
-        justifyContent: 'center', //Centered horizontally
-        alignItems: 'center', //Centered vertically
+        justifyContent: 'center',
+        alignItems: 'center',
         flex: 1,
         borderWidth: 1,
         borderRadius: 5,
